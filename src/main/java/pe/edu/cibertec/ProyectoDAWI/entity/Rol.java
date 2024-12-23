@@ -1,5 +1,7 @@
 package pe.edu.cibertec.ProyectoDAWI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +23,7 @@ public class Rol {
     private String nombre; // Valores posibles: "ADMINISTRADOR", "CLIENTE"
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+
     private List<Usuario> usuarios;
 }
