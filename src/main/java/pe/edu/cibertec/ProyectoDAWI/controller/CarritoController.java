@@ -161,7 +161,6 @@ public class CarritoController {
         return "productoDetalle";  // Vista que muestra detalles del producto
     }
 
-    // Procesar pago
     @PostMapping("/pago/procesar")
     public String procesarPago(@RequestParam String nombre,
                                @RequestParam String numeroTarjeta,
@@ -198,13 +197,20 @@ public class CarritoController {
             if (carrito != null) {
                 for (Producto producto : carrito) {
                     producto.getVentas().add(venta);  // Asociar la venta al producto
-                    producto.setStock(producto.getStock() - producto.getCantidad());  // Reducir el stock
-                    productoRepository.save(producto);  // Guardar los cambios en el producto
+
+                    // Verificar si el stock es suficiente para la compra
+                    if (producto.getStock() >= producto.getCantidad()) {
+                        producto.setStock(producto.getStock() - producto.getCantidad());  // Reducir el stock
+                        productoRepository.save(producto);  // Guardar los cambios en el producto
+                    } else {
+                        model.addAttribute("mensaje", "No hay suficiente stock para el producto: " + producto.getDescripcion());
+                        return "cliente/pago";  // Redirigir al formulario de pago si no hay suficiente stock
+                    }
                 }
             }
 
             // Limpiar el carrito después del pago
-            session.setAttribute("carrito", new ArrayList<>());
+            session.setAttribute("carrito", new ArrayList<>());  // Vaciar el carrito
 
             model.addAttribute("mensaje", "¡Pago exitoso! Gracias por tu compra.");
             return "cliente/compraExitosa";  // Vista de pago exitoso
@@ -213,6 +219,7 @@ public class CarritoController {
             return "cliente/pago";  // Vista de pago en caso de error
         }
     }
+
 
     private double calcularTotal(HttpSession session) {
         double total = 0;
