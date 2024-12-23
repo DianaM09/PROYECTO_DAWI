@@ -31,6 +31,7 @@ public class ProductoDetailDto {
     private Usuario usuarioRegistro;
 
     private Date fechaRegistro;
+    private String foto;
 
     private Date fechaModificacion;
 

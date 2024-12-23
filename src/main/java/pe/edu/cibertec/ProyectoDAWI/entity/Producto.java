@@ -1,6 +1,7 @@
 package pe.edu.cibertec.ProyectoDAWI.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,17 +34,20 @@ public class Producto {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
     private int estado;
+    private String foto;
 
     @Transient // Usamos @Transient si la cantidad no se guarda directamente en la base de datos
     private int cantidad;
     // Relación Many-to-Many con Producto
     // Relación Many-to-Many con Venta
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     @JoinTable(
             name = "venta_producto", // Nombre de la tabla intermedia
             joinColumns = @JoinColumn(name = "id_producto"), // Columna que hace referencia a Producto
             inverseJoinColumns = @JoinColumn(name = "id_venta") // Columna que hace referencia a Venta
     )
+    @JsonIgnore
     private List<Venta> ventas; // Lista de ventas asociadas a este producto
 }
 

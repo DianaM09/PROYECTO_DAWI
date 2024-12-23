@@ -22,8 +22,7 @@ public class Rol {
     @Column(nullable = false, unique = true)
     private String nombre; // Valores posibles: "ADMINISTRADOR", "CLIENTE"
 
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @JsonIgnore // Evitar ciclos en serialización JSON
     private List<Usuario> usuarios;
 }

@@ -30,13 +30,13 @@ public class Usuario {
     private Date fechaRegistro;
     private String fotoPerfil;
     private int estado;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "usuario_roles",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_rol")
     )
-    @JsonIgnore
+    @JsonIgnore // Evitar ciclos en serialización JSON
     private List<Rol> roles;
 
 

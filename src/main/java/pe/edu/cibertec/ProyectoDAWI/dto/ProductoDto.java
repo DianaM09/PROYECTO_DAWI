@@ -16,5 +16,6 @@ public class ProductoDto {
     private String descripcion;
     private Double precio;
     private Integer stock;
+    private String foto;
     private String categoriaDescripcion;  // Campo para almacenar la descripción de la categoría
 }

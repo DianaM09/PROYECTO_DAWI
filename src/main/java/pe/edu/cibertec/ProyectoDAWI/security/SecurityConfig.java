@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()  // Rutas abiertas
                         .requestMatchers("/admin/**").hasRole("administrador")  // Solo administradores pueden acceder
                         .requestMatchers("/cliente/**").hasAnyRole("administrador", "cliente")  // Administradores y clientes pueden acceder
-                        .requestMatchers("/login", "/registro", "/css/**", "/js/**").permitAll()  // Rutas abiertas para login y recursos estáticos
+                        .requestMatchers("/login", "/registro", "/css/**", "/js/**","/images/**").permitAll()  // Rutas abiertas para login y recursos estáticos
                         .anyRequest().authenticated()  // El resto de rutas requieren autenticación
                 )
                 .formLogin(form -> form

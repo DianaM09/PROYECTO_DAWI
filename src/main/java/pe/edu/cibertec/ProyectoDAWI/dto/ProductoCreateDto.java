@@ -13,5 +13,6 @@ public class ProductoCreateDto {
     private Integer id_categoria; // ID de la categoría seleccionada
     private Double precio;
     private Integer stock;
+    private String foto;
     private Integer id_usuario_registro; // ID del usuario que registra el producto
 }

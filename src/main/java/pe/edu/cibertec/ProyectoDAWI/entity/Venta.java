@@ -1,6 +1,7 @@
 package pe.edu.cibertec.ProyectoDAWI.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +31,6 @@ public class Venta {
     private int estado;
     // Relación Many-to-Many con Producto
     @ManyToMany(mappedBy = "ventas") // Relación inversa, se mapea con el atributo "ventas" en Producto
+    @JsonIgnore
     private List<Producto> productos; // Lista de productos asociados a esta venta
 }

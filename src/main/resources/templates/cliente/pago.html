@@ -10,6 +10,11 @@
 <div class="container mt-5">
     <h1>Metodo de Pago</h1>
 
+    <!-- Mostrar mensaje de error si existe -->
+    <div th:if="${mensaje}" class="alert alert-danger">
+        <span th:text="${mensaje}"></span>
+    </div>
+
     <form action="/cliente/pago/procesar" method="post">
         <!-- Detalles de la tarjeta de crédito -->
         <div class="mb-3">

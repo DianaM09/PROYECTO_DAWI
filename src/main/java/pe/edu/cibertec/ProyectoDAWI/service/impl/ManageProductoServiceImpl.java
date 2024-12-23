@@ -44,6 +44,7 @@ public class ManageProductoServiceImpl implements ManageProductoService {
             ProductoDto dto = new ProductoDto();
             dto.setId_producto(producto.getId_producto());
             dto.setCodigo(producto.getCodigo());
+            dto.setFoto(producto.getFoto());
             dto.setDescripcion(producto.getDescripcion());
             dto.setPrecio(producto.getPrecio());
             dto.setStock(producto.getStock());
@@ -62,6 +63,7 @@ public class ManageProductoServiceImpl implements ManageProductoService {
         Optional<Producto> productoOpt = productoRepository.findById(id_producto);
         return productoOpt.map(producto -> {
             ProductoDetailDto dto = new ProductoDetailDto();
+            dto.setFoto(producto.getFoto());
             dto.setId_producto(producto.getId_producto());
             dto.setCodigo(producto.getCodigo());
             dto.setDescripcion(producto.getDescripcion());
@@ -82,6 +84,7 @@ public class ManageProductoServiceImpl implements ManageProductoService {
         Optional<Producto> optionalProducto = productoRepository.findById(productoDto.getId_producto());
         if (optionalProducto.isPresent()) {
             Producto producto = optionalProducto.get();
+            producto.setFoto(productoDto.getFoto());
             producto.setCodigo(productoDto.getCodigo());
             producto.setDescripcion(productoDto.getDescripcion());
             producto.setPrecio(productoDto.getPrecio());
@@ -114,6 +117,7 @@ public class ManageProductoServiceImpl implements ManageProductoService {
         Optional<Usuario> usuario = usuarioRepository.findById(productoCreateDto.getId_usuario_registro());
         if (categoria.isPresent() && usuario.isPresent()) {
             Producto producto = new Producto();
+            producto.setFoto(productoCreateDto.getFoto());
             producto.setCodigo(productoCreateDto.getCodigo());
             producto.setDescripcion(productoCreateDto.getDescripcion());
             producto.setCategoria(categoria.get());

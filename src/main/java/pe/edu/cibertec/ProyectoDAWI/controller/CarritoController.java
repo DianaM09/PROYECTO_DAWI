@@ -50,7 +50,10 @@ public class CarritoController {
             // Obtener todos los productos
             List<ProductoDto> productos = productoService.getAllProductos();
             model.addAttribute("productos", productos);
-
+            // Verificar si la URL de la imagen está correcta
+            for (ProductoDto producto : productos) {
+                System.out.println("Foto URL: " + producto.getFoto());  // Imprimir la URL de la foto en los logs
+            }
             // Obtener las categorías para mostrar como filtros o en un menú (si es necesario)
             List<CategoriaDto> categorias = productoService.getAllCategorias();
             model.addAttribute("categorias", categorias);
@@ -69,6 +72,7 @@ public class CarritoController {
         List<Producto> productos = StreamSupport.stream(productoRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
         model.addAttribute("productos", productos);
+
         return "cliente/vistaTienda";  // Vista que muestra los productos
     }
 
@@ -185,6 +189,7 @@ public class CarritoController {
             Venta venta = new Venta();
             venta.setUsuarioRegistro(objUsuario);
             venta.setFechaRegistro(new Date());
+
             venta.setTotal(calcularTotal(session));
 
             // Guardar la venta
@@ -213,7 +218,7 @@ public class CarritoController {
             session.setAttribute("carrito", new ArrayList<>());  // Vaciar el carrito
 
             model.addAttribute("mensaje", "¡Pago exitoso! Gracias por tu compra.");
-            return "cliente/compraExitosa";  // Vista de pago exitoso
+            return "cliente/compraExitosa";  // Si tienes una página de carrito para ver el contenido
         } else {
             model.addAttribute("mensaje", "Hubo un error con el pago. Intenta de nuevo.");
             return "cliente/pago";  // Vista de pago en caso de error
@@ -241,4 +246,6 @@ public class CarritoController {
     public String mostrarFormularioPago() {
         return "cliente/pago";  // Vista de formulario de pago
     }
+
+
 }
