@@ -93,7 +93,7 @@ public class SecurityConfig {
                 if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_administrador"))) {
                     redirectUrl = "/admin/start";
                 } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_cliente"))) {
-                    redirectUrl = "/cliente/home";
+                    redirectUrl = "/cliente/tienda";
                 }
 
                 response.sendRedirect(redirectUrl);

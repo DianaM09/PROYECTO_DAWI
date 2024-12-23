@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,5 +36,14 @@ public class Producto {
 
     @Transient // Usamos @Transient si la cantidad no se guarda directamente en la base de datos
     private int cantidad;
+    // Relación Many-to-Many con Producto
+    // Relación Many-to-Many con Venta
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "venta_producto", // Nombre de la tabla intermedia
+            joinColumns = @JoinColumn(name = "id_producto"), // Columna que hace referencia a Producto
+            inverseJoinColumns = @JoinColumn(name = "id_venta") // Columna que hace referencia a Venta
+    )
+    private List<Venta> ventas; // Lista de ventas asociadas a este producto
 }
 

@@ -35,7 +35,7 @@
                 <td th:text="'$ ' + ${producto.precio}">Precio</td>
                 <td>
                     <!-- Campo para modificar la cantidad -->
-                    <form action="#" th:action="@{/carrito/actualizarCantidad}" method="post">
+                    <form action="#" th:action="@{/cliente/carrito/actualizarCantidad}" method="post">
                         <input type="hidden" th:name="id_producto" th:value="${producto.id_producto}" />
                         <input type="number" th:name="cantidad" th:value="${producto.cantidad}" min="1" class="form-control" style="width: 60px;" />
                         <button type="submit" class="btn btn-warning mt-2">Actualizar</button>
@@ -44,7 +44,7 @@
                 <td th:text="'$ ' + ${producto.precio * producto.cantidad}">Subtotal</td>
                 <td>
                     <!-- Formulario para eliminar el producto del carrito -->
-                    <form action="#" th:action="@{/carrito/eliminar}" method="post">
+                    <form action="#" th:action="@{/cliente/carrito/eliminar}" method="post">
                         <input type="hidden" th:name="id_producto" th:value="${producto.id_producto}" />
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
@@ -61,7 +61,7 @@
 
     <!-- Botón para continuar con la compra -->
     <div class="mt-4">
-        <a href="/pago/procesar" class="btn btn-primary">Proceder al pago</a>
+        <a href="/cliente/pago/procesar" class="btn btn-primary">Proceder al pago</a>
     </div>
 </div>
 

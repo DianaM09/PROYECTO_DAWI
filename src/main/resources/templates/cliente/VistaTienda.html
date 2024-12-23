@@ -56,7 +56,7 @@
                     <!-- Precio del producto -->
                     <p class="product-price" th:text="'$ ' + ${producto.precio}">Precio</p>
                     <!-- Botón de agregar al carrito -->
-                    <form action="/carrito/agregar" method="post">
+                    <form action="/cliente/carrito/agregar" method="post">
                         <!-- Asegúrate de que el valor sea un número entero directamente -->
                         <input type="hidden" th:value="${producto.id_producto}" name="id_producto"/>
                         <input type="number" name="cantidad" value="1" min="1" required />
@@ -69,7 +69,7 @@
     </div>
     <!-- Botón para ir al carrito de compras -->
     <div class="text-center mt-4">
-        <a href="/carrito" class="btn btn-primary">Ir al carrito</a>
+        <a href="/cliente/carrito" class="btn btn-primary">Ir al carrito</a>
     </div>
 </div>
 

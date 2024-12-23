@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,4 +28,7 @@ public class Venta {
     private Date fechaRegistro;
     private Double total;
     private int estado;
+    // Relación Many-to-Many con Producto
+    @ManyToMany(mappedBy = "ventas") // Relación inversa, se mapea con el atributo "ventas" en Producto
+    private List<Producto> productos; // Lista de productos asociados a esta venta
 }
